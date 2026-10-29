@@ -4,11 +4,11 @@ section .bss
 section .text
     global _start
 
-    ; --- Declaración de símbolos externos de los otros archivos ---
+    ; --- Declaración de símbolos externos de los otros archivos 
     extern leer_caracter         
     extern str_len
     extern string_to_int
-    extern Sumar                 ; (Si en suma.asm se llama suma, cámbialo a: extern suma)
+    extern Sumar                 
     extern int_to_string
     extern print_string
     extern buffer
@@ -19,7 +19,7 @@ main_suma:
     mov ebp, esp
     sub esp, 16                  ; Reserva espacio para len1, num1, len2 y num2
 
-    ; --- 1. Leer primer número ---
+    ; --- 1. Leer primer número 
     call leer_caracter
 
     push buffer
@@ -32,7 +32,7 @@ main_suma:
     add esp, 4
     mov [ebp-8], eax             ; num1
 
-    ; --- 2. Leer segundo número ---
+    ; --- 2. Leer segundo número 
     call leer_caracter           
 
     push buffer
@@ -40,18 +40,18 @@ main_suma:
     add esp, 4
     mov [ebp-12], eax            ; len2
 
-    push dword [ebp-12]          ; <-- Línea 30 corregida con dword
+    push dword [ebp-12]          
     call string_to_int
     add esp, 4
     mov [ebp-16], eax            ; num2
 
-    ; --- 3. Sumar ---
-    push dword [ebp-8]           ; <-- Línea 37 corregida con dword
-    push dword [ebp-16]          ; <-- Línea 38 corregida con dword
-    call Sumar                   ; (O 'call suma', según como se llame en suma.asm)
+    ; --- 3. Sumar 
+    push dword [ebp-8]           
+    push dword [ebp-16]          
+    call Sumar                   
     add esp, 8
 
-    ; --- 4. Convertir resultado a texto e imprimir ---
+    ; --- 4. Convertir resultado a texto e imprimir 
     push res_str
     call int_to_string
     add esp, 4
@@ -60,7 +60,7 @@ main_suma:
     call print_string
     add esp, 4
 
-    ; --- 5. Salir del programa ---
+    ; --- 5. Salir del programa
     mov esp, ebp
     pop ebp
 
