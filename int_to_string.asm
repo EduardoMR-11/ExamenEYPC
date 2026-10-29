@@ -18,7 +18,7 @@ int_to_string:
     cmp eax, 0
     jge _l1
     mov byte [esi], '-'    
-    inc dword [ebp-4]      ; <--- CORREGIDO: Incrementamos el contador de tamaño (no [ebp+8]) para dejar espacio al '-'
+    inc dword [ebp-4]      ; Incrementamos el contador de tamaño (no [ebp+8]) para dejar espacio al '-'
     neg eax
     jmp _l2
 
