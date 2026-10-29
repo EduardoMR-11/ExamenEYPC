@@ -15,14 +15,14 @@ section .text
     extern str_len           
 
 leer_caracter:
-    ; --- Imprime mensaje de instrucción (sys_write) ---
-    mov eax, 4           ; Corrección: 4 es sys_write 
+    ; --- Imprime mensaje de instrucción (sys_write)
+    mov eax, 4           ; 4 es sys_write 
     mov ebx, 1           ; Descriptor 1 = stdout
     mov ecx, msg         ; Dirección del mensaje en ecx
     mov edx, len         ; Longitud del mensaje
     int 0x80
 
-    ; --- Lee desde el teclado (sys_read) ---
+    ; --- Lee desde el teclado (sys_read) 
     mov eax, 3           ; 3 = sys_read
     mov ebx, 0           ; Descriptor 0 = stdin (teclado)
     mov ecx, buffer      ; Guardar entrada en buffer
@@ -37,16 +37,16 @@ print_string:
     ; Calculamos la longitud de la cadena a imprimir usando str_len
     push dword [ebp+8]
     call str_len
-    add esp, 4           ; eax ahora tiene la longitud de la cadena
+    add esp, 4           ; eax = longitud de la cadena
 
-    ; --- Imprime el resultado (sys_write) ---
+    ; --- Imprimir el resultado (sys_write)
     mov edx, eax         ; Longitud devuelta por str_len
     mov eax, 4           ; sys_write
     mov ebx, 1           ; stdout
     mov ecx, [ebp+8]     ; Dirección de la cadena a imprimir
     int 0x80
 
-    ; --- Imprime un salto de línea ---
+    ; --- Imprime un salto de línea 
     mov eax, 4
     mov ebx, 1
     mov ecx, salto
